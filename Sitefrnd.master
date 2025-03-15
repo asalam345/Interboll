@@ -1,0 +1,1076 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Sitefrnd.master.cs" Inherits="Sitefrnd" %>
+
+<%@ Register Src="Usercontrol/Profile.ascx" TagName="ddlReligious" TagPrefix="uc1" %>
+<%@ Register Src="Usercontrol/leftevent.ascx" TagName="leftevent" TagPrefix="uc1" %>
+<%@ Register Src="Usercontrol/leftside.ascx" TagName="left" TagPrefix="uc1" %>
+<%@ Register Src="Usercontrol/ucRightsidefrnd.ascx" TagName="Right" TagPrefix="uc1" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head id="Head1" runat="server">
+
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Interboll</title>
+    <meta name="description" content="">
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+    <!-- Place favicon.ico in the root directory -->
+    <link href="css/album.css" rel="stylesheet" />
+    <%--       <link rel="stylesheet" href="css/normalize.css" type="text/css"/>--%>
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="css/animate.css" type="text/css" />
+    <link rel="stylesheet" href="css/main.css" type="text/css" />
+    <link rel="stylesheet" href="css/responsive.css" type="text/css" />
+    <%--      <script src="js/vendor/modernizr-2.8.3.min.js" type=""></script>--%>
+    <link href="css/hoverphotocss/style_common.css" rel="stylesheet" />
+    <link href="css/hoverphotocss/style3.css" rel="stylesheet" />
+    <link href="css/hoverphotocss/style1.css" rel="stylesheet" />
+
+
+    <script>
+        //this function can remove a array element.
+        Array.remove = function (array, from, to) {
+            var rest = array.slice((to || from) + 1 || array.length);
+            array.length = from < 0 ? array.length + from : from;
+            return array.push.apply(array, rest);
+        };
+
+        //this variable represents the total number of popups can be displayed according to the viewport width
+        var total_popups = 0;
+
+        //arrays of popups ids
+        var popups = [];
+
+        //this is used to close a popup
+        function close_popup(id) {
+            for (var iii = 0; iii < popups.length; iii++) {
+                if (id == popups[iii]) {
+                    Array.remove(popups, iii);
+
+                    document.getElementById(id).style.display = "none";
+
+                    calculate_popups();
+
+                    return;
+                }
+            }
+        }
+
+        //displays the popups. Displays based on the maximum number of popups that can be displayed on the current viewport width
+        function display_popups() {
+            var right = 27;
+
+            var iii = 0;
+            for (iii; iii < total_popups; iii++) {
+                if (popups[iii] != undefined) {
+                    var element = document.getElementById(popups[iii]);
+                    element.style.right = right + "px";
+                    right = right + 320;
+                    element.style.display = "block";
+                }
+            }
+
+            for (var jjj = iii; jjj < popups.length; jjj++) {
+                var element = document.getElementById(popups[jjj]);
+                element.style.display = "none";
+            }
+        }
+
+        //creates markup for a new popup. Adds the id to popups array.
+        function register_popup(id, name) {
+
+            for (var iii = 0; iii < popups.length; iii++) {
+                //already registered. Bring it to front.
+                if (id == popups[iii]) {
+                    Array.remove(popups, iii);
+
+                    popups.unshift(id);
+
+                    calculate_popups();
+
+
+                    return;
+                }
+            }
+
+            var element = '<div class="popup-box chat-popup" id="' + id + '">';
+            element = element + '<div class="popup-head">';
+            element = element + '<div class="popup-head-left">' + name + '</div>';
+            element = element + '<div class="popup-head-right"><a href="javascript:close_popup(\'' + id + '\');">&#10005;</a></div>';
+            element = element + '<div style="clear: both"></div></div><div class="popup-messages"></div></div>';
+
+            document.getElementsByTagName("body")[0].innerHTML = document.getElementsByTagName("body")[0].innerHTML + element;
+
+            popups.unshift(id);
+
+            calculate_popups();
+
+        }
+
+        //calculate the total number of popups suitable and then populate the toatal_popups variable.
+        function calculate_popups() {
+            var width = window.innerWidth;
+            if (width < 540) {
+                total_popups = 0;
+            }
+            else {
+                width = width - 200;
+                //320 is width of a single popup box
+                total_popups = parseInt(width / 320);
+            }
+
+            display_popups();
+
+        }
+
+        //recalculate when window is loaded and also when window is resized.
+        window.addEventListener("resize", calculate_popups);
+        window.addEventListener("load", calculate_popups);
+
+    </script>
+    <script type="text/jscript">
+        //this function can remove a array element.
+        Array.remove = function (array, from, to) {
+            var rest = array.slice((to || from) + 1 || array.length);
+            array.length = from < 0 ? array.length + from : from;
+            return array.push.apply(array, rest);
+        };
+
+        //this variable represents the total number of popups can be displayed according to the viewport width
+        var total_popups = 0;
+
+        //arrays of popups ids
+        var popups = [];
+
+        //this is used to close a popup
+        function close_popup(id) {
+            for (var iii = 0; iii < popups.length; iii++) {
+                if (id == popups[iii]) {
+                    Array.remove(popups, iii);
+
+                    document.getElementById(id).style.display = "none";
+
+                    calculate_popups();
+
+                    return;
+                }
+            }
+        }
+
+        //displays the popups. Displays based on the maximum number of popups that can be displayed on the current viewport width
+        function display_popups() {
+            var right = 19;
+
+            var iii = 0;
+            for (iii; iii < total_popups; iii++) {
+                if (popups[iii] != undefined) {
+                    var element = document.getElementById(popups[iii]);
+                    element.style.right = right + "px";
+                    right = right + 320;
+                    element.style.display = "block";
+                }
+            }
+
+            for (var jjj = iii; jjj < popups.length; jjj++) {
+                var element = document.getElementById(popups[jjj]);
+                element.style.display = "none";
+            }
+        }
+
+        //creates markup for a new popup. Adds the id to popups array.
+        function register_popup(id, name) {
+
+            for (var iii = 0; iii < popups.length; iii++) {
+                //already registered. Bring it to front.
+                if (id == popups[iii]) {
+                    Array.remove(popups, iii);
+
+                    popups.unshift(id);
+
+                    calculate_popups();
+
+
+                    return;
+                }
+            }
+
+            var element = '<div class="popup-box chat-popup" id="' + id + '">';
+            element = element + '<div class="popup-head">';
+            element = element + '<div class="popup-head-left">' + name + '</div>';
+            element = element + '<div class="popup-head-right"><a href="javascript:close_popup(\'' + id + '\');">&#10005;</a></div>';
+            element = element + '<div style="clear: both"></div></div><div class="popup-messages"></div></div>';
+
+            document.getElementsByTagName("body")[0].innerHTML = document.getElementsByTagName("body")[0].innerHTML + element;
+
+            popups.unshift(id);
+
+            calculate_popups();
+
+        }
+
+        //calculate the total number of popups suitable and then populate the toatal_popups variable.
+        function calculate_popups() {
+            var width = window.innerWidth;
+            if (width < 540) {
+                total_popups = 0;
+            }
+            else {
+                width = width - 200;
+                //320 is width of a single popup box
+                total_popups = parseInt(width / 320);
+            }
+
+            display_popups();
+
+        }
+
+        //recalculate when window is loaded and also when window is resized.
+        window.addEventListener("resize", calculate_popups);
+        window.addEventListener("load", calculate_popups);
+    </script>
+
+    <script type="text/javascript">
+        $(function () {
+            $("#chatData").focus();
+            $('<audio id="chatAudio"><source src="notify.ogg" type="audio/ogg"><source src="notify.mp3" type="audio/mpeg"><source src="notify.wav" type="audio/wav"></audio>').appendTo('body');
+            $("#trig").on("click", function () {
+                var a = $("#chatData").val().trim();
+                if (a.length > 0) {
+                    $("#chatData").val('');
+                    $("#chatData").focus();
+                    $("<li></li>").html('<img src="small.jpg"/><span>' + a + '</span>').appendTo("#chatMessages");
+                    $("#chat").animate({ "scrollTop": $('#chat')[0].scrollHeight }, "slow");
+                    $('#chatAudio')[0].play();
+                }
+            });
+        });
+    </script>
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+
+<body style="padding: 10px; background-color: #ea3328;">
+
+    <form id="form1" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server">
+        </asp:ScriptManager>
+        <div class="bottomborderindex"></div>
+        <%-- <div class="bottomborder"></div>--%>
+        <div class="backgroundbgcolor">
+            <div class="row gutter-10">
+
+                <!--left-side-start-->
+                <div class="desktopshow">
+                    <uc1:leftevent ID="leftevent1" runat="server" Visible="false" />
+                    <uc1:left ID="left1" runat="server" Visible="false" />
+                </div>
+                <div class="mobileversion">
+                    <uc1:Right ID="Right1" runat="server" Visible="true" />
+                </div>
+                <!--left-side-end-->
+                <!-- end of left content -->
+                <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                </asp:ContentPlaceHolder>
+                <div class="col-sm-4 desktopshow">
+                    <div style="height: 5px"></div>
+                    <div class="profilcoverpage">
+                        <div class="view view-first">
+                            <img src="<%=lok1.Text%>" style="width: 436px; height: 138px" />
+                            <a data-target="#updatecoverphoto" data-toggle="modal" href="#">
+                                <div class="mask">
+
+                                    <div style="font-size: 16px; text-align: left; color: #ffffff; padding: 15px">
+                                    </div>
+
+
+                                    <%--             <a href="#" class="info">Read More</a>--%>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="col-sm-8">
+                            <div class="updateinformation2">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 text-right">
+
+
+                            <div class="profiletopimg">
+                                <div class="profilenametext">
+                                    <asp:Label ID="lblName" runat="server" Text=""></asp:Label></div>
+                                <div class="view view-first">
+                                    <img border="0" src="<%=lok2.Text%>" class="imgpro">
+                                    <%-- <img src="images/9.jpg" />--%>
+                                    <a data-target="#updatephoto" data-toggle="modal" href="#">
+                                        <div class="mask">
+                                            <div style="color: #ffffff; font-size: 12px; padding-top: 27px; width: 80px;">
+                                                <i class="glyphicon glyphicon-camera"></i>
+                                            </div>
+                                            <%-- <p>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.</p>
+                                    <a href="#" class="info">Read More</a>--%>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+
+
+
+
+                        </div>
+
+
+                    </div>
+                    <!--social message notification start-->
+
+                    <div class="message_notificationwrap">
+                        <div class="">
+                            <div class="col-sm-2">
+                                <a href="signout.aspx">
+                                    <img border="0" src="img/signout.png" class="iconn" title="Logout" /></a>
+                            </div>
+
+                        </div>
+                        <div style="clear: both"></div>
+                    </div>
+                    <!--social message notification end-->
+
+                    <div class="boxsocial3">
+                        <div class="scrollboxhide3"></div>
+                        <div class="scrollboxhide3r"></div>
+                        <!--tab start-->
+                        <div class="tabcontentswrap">
+                            <div id="exTab2" class="">
+                                <ul class="nav nav-tabs tabcss">
+                                    <li class="menumin"><a href="eventdefault.aspx">Event</a>
+                                    </li>
+                               
+                                    <li class="menumin ">
+                                        <a href="outlinedefault.aspx">Outline</a>
+                                    </li>
+
+                                    <li class="menumin"><a aria-expanded="true" href="#4" data-toggle="tab">Photos</a>
+                                    </li>
+                                    <li class="menumin active"><a aria-expanded="false" href="#3" data-toggle="tab">Followers</a>
+                                    </li>
+                                    <li class="menumin"><a href="education.aspx">Education</a>
+                                    </li>
+
+                                    <li class="menumin"><a href="../games/Default.aspx" target="_blank">Games</a>
+                                    </li>
+                                    <li class="menumin"><a href="index_entertainment.html" target="_blank">
+                                        <div style="display: none">
+                                            <asp:Label ID="lblAdprofile" runat="server" Text=""></asp:Label>
+                                        </div>
+                                        Entertainment
+                                    </a>
+                                    </li>
+                                    <li class="menumin"><a aria-expanded="false" data-toggle="dropdown" type="button" class="dropdown-toggle" aria-expanded="true">More</a>
+
+
+                                        <%--  <div data-toggle="dropdown" type="button" class="dropdown-toggle" aria-expanded="true">
+					    <img border="0" title="Chat" class="iconn" src="img/chat.png">
+					 </div>--%>
+                                        <ul class="dropdown-menu moredropdown">
+
+                                            <%--    <li>
+                                             <a href="<%# "More.aspx?ID=" +blog.Encrypt("1") %>" style="text-decoration: none; padding: 0px">Video
+                                                </a>
+                                            </li>--%>
+                                            <asp:Repeater ID="rptMore" runat="server">
+                                                <ItemTemplate>
+                                                    <li>
+                                                        <a href="<%# "More.aspx?ID="  +blog.Encrypt(Eval("T_Id").ToString()) %>" style="text-decoration: none; padding: 0px">
+                                                            <asp:Label ID="lblcommentname" runat="server" Text='<%# Bind("T_Name") %>' Width=""></asp:Label>
+
+                                                        </a>
+                                                    </li>
+                                                </ItemTemplate>
+                                            </asp:Repeater>
+
+
+                                            <li>
+                                                <a href="Notes.aspx" style="text-decoration: none; padding: 0px">Notes
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="Reminder.aspx" style="text-decoration: none; padding: 0px">Reminders
+                                                </a>
+                                            </li>
+
+                                        </ul>
+                                    </li>
+                                </ul>
+
+                                <div class="tab-content tabcontents">
+                                    <div class="tab-pane active" id="1" style="">
+
+
+                                        <!--about end-->
+
+                                        <!--photo-box1 start-->
+                                        <div class="boxpro">
+                                            <div class="aboutwrap">
+                                                <div class="row">
+                                                    <div class="col-sm-3">
+                                                        <div class="col-sm-1">
+                                                            <a href="#">
+                                                                <img border="0" align="left" src="img/f2.png" class="aboutimg"></a>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <span style="font-size: 15px">Followers</span>
+                                                        </div>
+                                                    </div>
+                                                
+                                                    <div style="clear: both"></div>
+                                                </div>
+                                            </div>
+
+                                            <div class="friendsall">
+                                                <div class="row gutter-10">
+                                                    <asp:Repeater ID="rptFriends" runat="server">
+                                                        <ItemTemplate>
+                                                            <div class="col-sm-6">
+
+                                                                <div class="allfriends">
+                                                                    <div class="row">
+
+                                                                        <div class="col-sm-2">
+                                                                            <%--<img border="0" align="left" src="img/img1.png" class="imgprofriend">--%>
+                                                                            <a href="<%# "frndpage.aspx?ID=" +blog.Encrypt(Eval("IID").ToString()) %>">
+                                                                                <asp:Image ID="Image3" runat="server" ImageUrl='<%# Bind("Profile_Image",  "~/{0}") %>' class="imgprofriend" />
+                                                                            </a>
+                                                                        </div>
+                                                                        <div class="col-sm-7">
+                                                                            <a href="<%# "frndpage.aspx?ID=" +blog.Encrypt(Eval("IID").ToString()) %>">
+                                                                                <div style="font-size: 11px;">
+                                                                                    <asp:Label ID="Label3" runat="server" Text='<%# Bind("First_Name") %>' Width=" "></asp:Label>
+                                                                            </a>
+                                                                            <br>
+                                                                            <%--<span class="font-size:11px;">3 mutual Followers</span>--%>
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div class="col-sm-2">
+
+                                                                        <div class="confirmbtnf2">Followers</div>
+
+                                                                    </div>
+
+                                                                </div>
+
+                                                            </div>
+                                                            <div style="clear: both"></div>
+                                                            </div>
+                                                        </ItemTemplate>
+                                                    </asp:Repeater>
+                                                    <div style="clear: both"></div>
+                                                </div>
+
+
+
+                                            </div>
+
+
+                                            <div style="clear: both"></div>
+                                        </div>
+                                        <!--post-box1 end-->
+
+
+                                        <!--post-box1 start-->
+                                        <div class="boxpro">
+                                            <div class="aboutwrap">
+                                                <div class="row">
+                                                    <div class="col-sm-3">
+                                                        <div class="col-sm-1">
+                                                            <a href="#">
+                                                                <img border="0" align="left" src="img/f2.png" class="aboutimg"></a>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <span style="font-size: 15px">Photos</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-9 text-right">
+                                                        <ul class="nav nav-tabs tabalbumwrap">
+                                                            <%-- <li class="tabalbum"><a href="Createphoto.aspx" aria-expanded="true">Create Album</a>
+                                                            </li>--%>
+
+                                                            <li class="tabalbum active"><a data-toggle="tab" href="#yourphoto2f" aria-expanded="false">Your Photo</a>
+                                                            </li>
+                                                            <li class="tabalbum">
+                                                                <a data-toggle="tab" href="#album2f" aria-expanded="false">Albums
+
+                                                                </a>
+                                                            </li>
+
+                                                        </ul>
+                                                    </div>
+
+                                                    <div style="clear: both"></div>
+                                                </div>
+                                            </div>
+
+                                            <div class="" id="exTab2">
+                                                <div class="tab-content tabcontents">
+                                                    <div style="" id="yourphoto2f" class="tab-pane active">
+                                                        <div class="friendsall" style="margin-top: 10px">
+                                                            <div class="row gutter-10">
+                                                                <asp:Repeater ID="dlPostImage" runat="server">
+                                                                    <ItemTemplate>
+                                                                        <div class="col-sm-4" style="margin-bottom: 4px">
+
+
+                                                                            <%--<asp:Image ID="Image3" runat="server"  class="img-responsive" ImageUrl='<%# Bind("Image_Name",  "~/images/Items/{0}") %>'  style="margin-bottom: 10px; height:120px; width:100% "/>                                                --%>
+
+                                                                            <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl='<%# Eval("Image_Name",  "~/images/Items/{0}")%>'
+                                                                                Style="height: 120px; width: 100%; border-width: 0px; cursor: pointer;"
+                                                                                OnClientClick="return LoadDiv(this.src);" />
+
+
+                                                                        </div>
+                                                                    </ItemTemplate>
+                                                                </asp:Repeater>
+
+
+                                                                <div style="clear: both"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div style="" id="album2f" class="tab-pane">
+                                                        <div class="friendsall" style="margin-top: 10px">
+                                                            <div class="row gutter-10">
+                                                                <asp:Repeater ID="dlalbum" runat="server" Visible="true">
+                                                                    <ItemTemplate>
+                                                                        <div class="col-sm-3">
+                                                                            <a href="ShowAlbumPic11.aspx" target="_blank">
+                                                                                <div class="photouploasmallthumble">
+                                                                                    <a href="<%# "ShowAlbumPic1.aspx?ID=" +blog.Encrypt(Eval("Album_Id").ToString()) %>" target="_blank">
+                                                                                        <asp:Image ID="Image2" Style="width: 100%; height: 120px" runat="server" ImageUrl='<%# Bind("Album_Image",  "~/images/Albums/{0}") %>' />
+                                                                                    </a>
+                                                                                    <br />
+                                                                                    <asp:Label ID="Label2" runat="server" Text='<%# Eval("Album_Name") %>' Width=" "></asp:Label>
+
+                                                                                </div>
+                                                                            </a>
+                                                                            <div class="leftimag2">
+                                                                                <%--  <asp:Button ID="Button4" runat="server" Text="Add Photo" OnClick="btnShareClicked" AutoPostBack="True" CommandArgument='<%#Eval("Album_Id")%>' cssclass="postbtn"/>--%>
+                                                                            </div>
+                                                                        </div>
+                                                                    </ItemTemplate>
+                                                                </asp:Repeater>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+
+
+                                            <div style="clear: both"></div>
+                                        </div>
+                                        <!--photo-box1 end-->
+
+                                        <div style="clear: both"></div>
+
+                                    </div>
+
+                                    <!--tab2 start-->
+                                    <div class="tab-pane" id="2">
+
+
+                                        <!--post-box1 start-->
+                                        <asp:Repeater ID="rptPost" runat="server">
+                                            <ItemTemplate>
+                                                <div class="boxpro">
+                                                    <div class="row">
+
+                                                        <div class="col-sm-9">
+                                                            <a href="#">
+                                                                <img border="0" align="left" class="imgprofilenotifi2" src="img/img3.png"></a>
+                                                            <a href="#">
+                                                                <asp:Label ID="Label2" runat="server" Text='<%# Eval("First_Name") %>' Width=" "></asp:Label><br>
+                                                                <span style="font-size: 11px"><%# string.Format("{0:dd MMM yyyy}", Eval("P_Date"))%></span>
+                                                                <br />
+                                                                <a href="#" class="textdecorationsta" title="Liked"><i class="glyphicon glyphicon-hand-right"></i>
+                                                                    <asp:Label ID="Label1" runat="server" Text='<%# Eval("Like1") %>' Width=" "></asp:Label>
+                                                                </a>
+
+                                                                <asp:Label ID="lblpostid" runat="server" Text='<%# Bind("P_Id") %>' Width=" " Visible="false"></asp:Label>
+                                                                <asp:Label ID="lblUserid" runat="server" Text='<%# Bind("A_User_Id") %>' Width=" " Visible="false"></asp:Label>
+                                                            </a>
+                                                        </div>
+
+                                                        <div class="col-sm-3 text-right">
+                                                            <div class="" id="MUser" runat="server">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="" style="margin-top: 10px">
+                                                        <%--	<a href="#"><img border="0" align="left" src="img/naturalimg.jpg" class="imresponsive"></a>--%>
+                                                        <div style="text-align: center">
+                                                            <asp:Image ID="Image1" runat="server" Height="" Width="100%" CssClass="imresponsive" Visible="" ImageUrl='<%# Bind("Post_Image", "~//images/Items/{0}") %>' /></div>
+
+
+
+
+
+
+
+                                                        <div style="clear: both"></div>
+
+                                                        <div style="clear: both"></div>
+                                                        <div style="margin-top: 10px; margin-bottom: 10px">
+                                                            <asp:Label ID="Label3" runat="server" Text='<%# Bind("P_Description") %>' Width=" "></asp:Label></div>
+                                                    </div>
+
+
+
+
+                                                    <div style="clear: both"></div>
+                                                </div>
+
+
+
+                                            </ItemTemplate>
+
+                                        </asp:Repeater>
+                                        <!--post-box1 end-->
+
+                                        <div style="clear: both"></div>
+                                    </div>
+
+
+                                    <div class="tab-pane" id="3">
+
+                                        <div class="boxpro2">
+                                            <div class="aboutwrap">
+                                                <div class="row">
+                                                    <%--  <div class="col-sm-1">
+							     <a href="#"> <img border="0" align="left" class="aboutimg" src="img/f2.png"></a>
+							   </div>--%>
+
+                                                    <div class="col-sm-12 text-right">
+                                                        <ul class="nav nav-tabs tabcssfollowers">
+                                                            <li class="menumfollow active"><a aria-expanded="false" href="#11" data-toggle="tab">Followers</a>
+                                                            </li>
+                                                            <li class="menumfollow"><a aria-expanded="false" href="#12" data-toggle="tab">Followers Requests</a>
+                                                            </li>
+                                                            <li class="menumfollow ">
+                                                                <a aria-expanded="false" href="#13" data-toggle="tab">Find Followers</a>
+                                                            </li>
+                                                            <li class="menumfollow"><a aria-expanded="false" href="#14" data-toggle="tab">Following</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <div style="clear: both"></div>
+                                                </div>
+                                            </div>
+
+                                            <div id="exTab2" class="">
+
+
+                                                <div class="tab-content tabcontents">
+                                                    <div class="tab-pane active" id="11" style="">
+                                                        <div class="row gutter-10">
+
+                                                            <asp:Repeater ID="rptFollowers" runat="server">
+                                                                <ItemTemplate>
+                                                                    <div class="col-sm-6">
+
+                                                                        <div class="allfriends">
+                                                                            <div class="row">
+                                                                                <div class="col-sm-2">
+                                                                                    <%--<img border="0" align="left" src="img/img1.png" class="imgprofriend">--%>
+                                                                                    <asp:Image ID="Image3" runat="server" ImageUrl='<%# Bind("Profile_Image",  "~/{0}") %>' class="imgprofriend" />
+                                                                                </div>
+                                                                                <div class="col-sm-7">
+                                                                                    <div style="font-size: 11px;">
+                                                                                        <asp:Label ID="Label3" runat="server" Text='<%# Bind("First_Name") %>' Width=" "></asp:Label><br>
+                                                                                        <%--<span class="font-size:11px;">3 mutual Followers</span>--%>
+                                                                                    </div>
+
+                                                                                </div>
+                                                                                <div class="col-sm-2">
+
+                                                                                    <div class="confirmbtnf2">Followers</div>
+
+                                                                                </div>
+
+                                                                            </div>
+
+                                                                        </div>
+                                                                        <div style="clear: both"></div>
+                                                                    </div>
+                                                                </ItemTemplate>
+                                                            </asp:Repeater>
+
+
+                                                            <div style="clear: both"></div>
+                                                        </div>
+                                                    </div>
+
+
+
+                                                    <div class="tab-pane" id="12" style="">
+                                                        <div class="row gutter-10">
+
+                                                            <asp:Repeater ID="rptRequest" runat="server">
+                                                                <ItemTemplate>
+                                                                    <div class="col-sm-6">
+
+                                                                        <div class="allfriends">
+                                                                            <div class="row">
+                                                                                <div class="col-sm-2">
+                                                                                    <%--<img border="0" align="left" src="img/img1.png" class="imgprofriend">--%>
+                                                                                    <asp:Image ID="Image3" runat="server" ImageUrl='<%# Bind("Profile_Image",  "~/images/Items/{0}") %>' class="imgprofriend" />
+                                                                                </div>
+                                                                                <div class="col-sm-7">
+                                                                                    <div style="font-size: 11px;">
+                                                                                        <asp:Label ID="Label3" runat="server" Text='<%# Bind("First_Name") %>' Width=" "></asp:Label><br>
+                                                                                        <%--<span class="font-size:11px;">3 mutual Followers</span>--%>
+                                                                                    </div>
+
+                                                                                </div>
+                                                                                <div class="col-sm-3">
+
+                                                                                    <span class="fontsizetext">request sent</span>
+
+                                                                                </div>
+
+                                                                            </div>
+
+                                                                        </div>
+                                                                        <div style="clear: both"></div>
+                                                                    </div>
+                                                                </ItemTemplate>
+                                                            </asp:Repeater>
+
+
+
+
+                                                            <div style="clear: both"></div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="tab-pane" id="13" style="">
+
+                                                        <div class="row gutter-10">
+                                                            <asp:Repeater ID="rptSearchFrnd" runat="server">
+                                                                <ItemTemplate>
+                                                                    <div class="col-sm-6">
+
+                                                                        <div class="allfriends">
+                                                                            <div class="row">
+                                                                                <div class="col-sm-2">
+                                                                                    <%--<img border="0" align="left" src="img/img1.png" class="imgprofriend">--%>
+                                                                                    <asp:Image ID="Image3" runat="server" ImageUrl='<%# Bind("Profile_Image",  "~/images/Items/{0}") %>' class="imgprofriend" />
+                                                                                </div>
+                                                                                <div class="col-sm-7">
+                                                                                    <div style="font-size: 11px;">
+                                                                                        <asp:Label ID="Label3" runat="server" Text='<%# Bind("First_Name") %>' Width=" "></asp:Label><br>
+                                                                                        <%--<span class="font-size:11px;">3 mutual Followers</span>--%>
+                                                                                    </div>
+                                                                                    <div style="clear: both"></div>
+                                                                                </div>
+                                                                                <div class="col-sm-2">
+                                                                                    <%--  <button class="confirmbtnf2">Followers</button>--%>
+                                                                                    <asp:Button ID="btnReply" runat="server" Text="Add" OnClick="btnReplyClicked" AutoPostBack="True" CommandArgument='<%#Eval("IID")%>' CssClass="confirmbtnf2" />
+                                                                                    </asp:LinkButton>
+                                         
+                                                                                </div>
+                                                                                <div style="clear: both"></div>
+                                                                            </div>
+                                                                            <div style="clear: both"></div>
+                                                                        </div>
+
+
+
+                                                                    </div>
+                                                                </ItemTemplate>
+                                                            </asp:Repeater>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="tab-pane" id="14" style="">
+
+
+                                                        <asp:Repeater ID="rptFollowing" runat="server">
+                                                            <ItemTemplate>
+                                                                <div class="col-sm-6">
+
+                                                                    <div class="allfriends">
+                                                                        <div class="row">
+                                                                            <div class="col-sm-2">
+                                                                                <%--<img border="0" align="left" src="img/img1.png" class="imgprofriend">--%>
+                                                                                <asp:Image ID="Image3" runat="server" ImageUrl='<%# Bind("Profile_Image",  "~/{0}") %>' class="imgprofriend" />
+                                                                            </div>
+                                                                            <div class="col-sm-7">
+                                                                                <div style="font-size: 11px;">
+                                                                                    <asp:Label ID="Label3" runat="server" Text='<%# Bind("First_Name") %>' Width=" "></asp:Label><br>
+                                                                                    <%--<span class="font-size:11px;">3 mutual Followers</span>--%>
+                                                                                </div>
+                                                                                <div style="clear: both"></div>
+                                                                            </div>
+                                                                            <div class="col-sm-2">
+                                                                                <%--  <button class="confirmbtnf2">Followers</button>--%>
+                                                                                <asp:Button ID="btnReply" runat="server" Text="Add" OnClick="btnReplyClicked1" AutoPostBack="True" CommandArgument='<%#Eval("IID")%>' />
+                                                                                </asp:LinkButton>
+                                         
+                                                                            </div>
+                                                                            <div style="clear: both"></div>
+                                                                        </div>
+                                                                    </div>
+
+
+
+                                                                </div>
+                                                            </ItemTemplate>
+                                                        </asp:Repeater>
+
+
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+
+
+
+                                            <div style="clear: both"></div>
+
+                                        </div>
+
+                                    </div>
+
+
+
+                                    <div class="tab-pane" id="4">
+                                        <!--post-box1 start-->
+                                        <div class="boxpro2">
+                                            <div class="aboutwrap">
+                                                <div class="row">
+                                                    <div class="col-sm-3">
+                                                        <div class="col-sm-1">
+                                                            <a href="#">
+                                                                <img border="0" align="left" src="img/f2.png" class="aboutimg"></a>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <span style="font-size: 15px">Photos</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-9 text-right">
+                                                        <ul class="nav nav-tabs tabalbumwrap">
+                                                            <%-- <li class="tabalbum"><a href="Createphoto.aspx" aria-expanded="true">Create Album</a>
+                                                            </li>--%>
+
+                                                            <li class="tabalbum active"><a data-toggle="tab" href="#yourphoto2fb2" aria-expanded="false">Your Photo</a>
+                                                            </li>
+                                                            <li class="tabalbum">
+                                                                <a data-toggle="tab" href="#album2fb2" aria-expanded="false">Albums
+
+                                                                </a>
+                                                            </li>
+
+                                                        </ul>
+                                                    </div>
+
+                                                    <div style="clear: both"></div>
+                                                </div>
+                                            </div>
+
+                                            <div class="" id="exTab2">
+                                                <div class="tab-content tabcontents">
+                                                    <div style="" id="yourphoto2fb2" class="tab-pane active">
+                                                        <div class="friendsall" style="margin-top: 10px">
+                                                            <div class="row gutter-10">
+                                                                <asp:Repeater ID="dlPostimage1" runat="server">
+                                                                    <ItemTemplate>
+                                                                        <div class="col-sm-4" style="margin-bottom: 4px">
+
+
+                                                                            <%--      <asp:Image ID="Image3" runat="server"  class="img-responsive" ImageUrl='<%# Bind("Image_Name",  "~/images/Items/{0}") %>'  style="margin-bottom: 10px; height:120px; width:100% "/> --%>
+                                                                            <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl='<%# Eval("Image_Name",  "~/images/Items/{0}")%>'
+                                                                                Style="height: 120px; width: 100%; border-width: 0px; cursor: pointer;"
+                                                                                OnClientClick="return LoadDiv(this.src);" />
+
+
+
+
+                                                                        </div>
+                                                                    </ItemTemplate>
+                                                                </asp:Repeater>
+
+
+                                                                <div style="clear: both"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div style="" id="album2fb2" class="tab-pane">
+                                                        <div class="friendsall" style="margin-top: 10px">
+                                                            <div class="row gutter-10">
+                                                                <asp:Repeater ID="Rptalbum2" runat="server" Visible="true">
+                                                                    <ItemTemplate>
+                                                                        <div class="col-sm-3">
+                                                                            <a href="ShowAlbumPic11.aspx" target="_blank">
+                                                                                <div class="photouploasmallthumble">
+                                                                                    <a href="<%# "ShowAlbumPic11.aspx?ID=" +blog.Encrypt(Eval("Album_Id").ToString()) %>" target="_blank">
+                                                                                        <asp:Image ID="Image2" Style="width: 100%; height: 120px" runat="server" ImageUrl='<%# Bind("Album_Image",  "~/images/Albums/{0}") %>' />
+                                                                                    </a>
+                                                                                    <br />
+                                                                                    <asp:Label ID="Label2" runat="server" Text='<%# Eval("Album_Name") %>' Width=" "></asp:Label>
+
+                                                                                </div>
+                                                                            </a>
+                                                                            <div class="leftimag2">
+                                                                                <%--  <asp:Button ID="Button4" runat="server" Text="Add Photo" OnClick="btnShareClicked" AutoPostBack="True" CommandArgument='<%#Eval("Album_Id")%>' cssclass="postbtn"/>--%>
+                                                                            </div>
+                                                                        </div>
+                                                                    </ItemTemplate>
+                                                                </asp:Repeater>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div style="clear: both"></div>
+                                        </div>
+                                        <!--photo-box1 end-->
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--tab end-->
+
+                    <div style="clear: both"></div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div id="divBackground" class="modal">
+
+            <div id="divImage" style="z-index: 999;">
+
+                <div class="" style="text-align: right; cursor: pointer" onclick="HideDiv()"><span class="glyphicon glyphicon-remove"></span></div>
+                <table style="height: 100%; width: 100%">
+                    <tr>
+                        <td valign="middle" align="center">
+                            <img id="imgLoader" alt="" src="images/loader.gif" />
+                            <img id="imgFull" alt="" src="" style="display: none; height: 500px; width: 543px" />
+                        </td>
+                    </tr>
+                    <tr>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <!--model addwork info start- photo-->
+
+        <div id="divBackground" class="modal">
+
+            <div id="divImage" style="z-index: 999;">
+
+                <div class="" style="text-align: right; cursor: pointer" onclick="HideDiv()"><span class="glyphicon glyphicon-remove"></span></div>
+                <table style="height: 100%; width: 100%">
+                    <tr>
+                        <td valign="middle" align="center">
+                            <img id="imgLoader" alt="" src="images/loader.gif" />
+                            <img id="imgFull" alt="" src="" style="display: none; height: 500px; width: 590px" />
+                        </td>
+                    </tr>
+                    <tr>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+
+
+
+
+
+
+        <!--About details info start-->
+        <!--cover photo image-->
+
+        <script src="js/vendor/jquery-1.11.3.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>
+
+        <asp:Literal ID="lblFirstname" runat="server" Visible="false"></asp:Literal>
+        <asp:Label ID="lok1" runat="server" Text="" Visible="false"></asp:Label>
+        <asp:Label ID="lok2" runat="server" Text="" Visible="false"></asp:Label>
+
+        <asp:HiddenField ID="hidArticleId" runat="server" />
+
+        <script type="text/javascript">
+            function LoadDiv(url) {
+                var img = new Image();
+                var bcgDiv = document.getElementById("divBackground");
+                var imgDiv = document.getElementById("divImage");
+                var imgFull = document.getElementById("imgFull");
+                var imgLoader = document.getElementById("imgLoader");
+                imgLoader.style.display = "block";
+                img.onload = function () {
+                    imgFull.src = img.src;
+                    imgFull.style.display = "block";
+                    imgLoader.style.display = "none";
+                };
+                img.src = url;
+                var width = document.body.clientWidth;
+                if (document.body.clientHeight > document.body.scrollHeight) {
+                    bcgDiv.style.height = document.body.clientHeight + "px";
+                }
+                else {
+                    bcgDiv.style.height = document.body.scrollHeight + "px";
+                }
+                imgDiv.style.left = (width - 650) / 2 + "px";
+                imgDiv.style.top = "20px";
+                bcgDiv.style.width = "100%";
+
+                bcgDiv.style.display = "block";
+                imgDiv.style.display = "block";
+                return false;
+            }
+            function HideDiv() {
+                var bcgDiv = document.getElementById("divBackground");
+                var imgDiv = document.getElementById("divImage");
+                var imgFull = document.getElementById("imgFull");
+                if (bcgDiv != null) {
+                    bcgDiv.style.display = "none";
+                    imgDiv.style.display = "none";
+                    imgFull.style.display = "none";
+                }
+            }
+        </script>
+    </form>
+
+    <!--less more start-->
+
+    <script src="js/lessmore.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.dolessmore').dolessmore();
+        });
+    </script>
+
+    <!--less more end-->
+</body>
+</html>
+
+
