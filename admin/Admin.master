@@ -1,0 +1,179 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Admin.master.cs" Inherits="admin_Admin" %>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin</title>
+    <!-- Core CSS - Include with every page -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <!-- Page-Level Plugin CSS - Tables -->
+    <link href="assets/css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
+    <!-- SB Admin CSS - Include with every page -->
+    <link href="assets/css/sb-admin.css" rel="stylesheet" />
+    <!-- Core Scripts - Include with every page -->
+    <script src="assets/js/jquery-1.10.2.js" type=""></script>
+    <script src="assets/js/bootstrap.min.js" type=""></script>
+    <script src="assets/js/plugins/metisMenu/jquery.metisMenu.js" type=""></script>
+    <!-- Page-Level Plugin Scripts - Tables -->
+    <script src="assets/js/plugins/dataTables/jquery.dataTables.js"></script>
+    <script src="assets/js/plugins/dataTables/dataTables.bootstrap.js" type=""></script>
+    <!-- SB Admin Scripts - Include with every page -->
+    <script src="assets/js/sb-admin.js" type=""></script>
+    <!-- Page-Level Demo Scripts - Tables - Use for reference -->
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server">
+    </asp:ContentPlaceHolder>
+
+
+    <style type="">
+        .navbar-default {
+            background-color: #e00035;
+        }
+
+            .navbar-default .navbar-brand {
+                color: #fff;
+            }
+
+                .navbar-default .navbar-brand:hover {
+                    color: #fff;
+                }
+
+        .nav > li > a {
+            color: #fff;
+        }
+
+            .nav > li > a:hover {
+                color: #FF6A00;
+            }
+
+        #wrapper {
+            background-color: #e00035;
+        }
+
+        .nav-second-level li a {
+            border-top: 1px solid #55B558;
+        }
+
+        .nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
+            color: #FF6A00;
+        }
+
+        .centerAlign {
+            text-align: center !important;
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server">
+        </asp:ScriptManager>
+        <div id="wrapper">
+            <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="../Default.aspx" runat="server">Interboll</a>
+                </div>
+                <!-- /.navbar-header -->
+
+                <ul class="nav navbar-top-links navbar-right">
+
+                    <!-- /.dropdown -->
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-user fa-fw"></i><i class="fa fa-caret-down"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="~/" runat="server"><i class="fa fa-home fa-fw"></i>Home</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li><a href="~/signout.aspx" runat="server"><i class="fa fa-sign-out fa-fw"></i>Logout</a>
+                            </li>
+                        </ul>
+                        <!-- /.dropdown-user -->
+                    </li>
+                    <!-- /.dropdown -->
+                </ul>
+                <!-- /.navbar-top-links -->
+
+                <div class="navbar-default navbar-static-side" role="navigation">
+                    <div class="sidebar-collapse">
+                        <ul class="nav" id="side-menu">
+                            <li>
+                                <a href="#"><i class="fa fa-wrench fa-fw"></i>Adverties<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="Manage_Item.aspx">Adverties</a>
+                                    </li>
+
+                                    <li>
+                                        <a href="Manage_More.aspx">More</a>
+                                    </li>
+
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+
+
+                            <li>
+                                <a href="#"><i class="fa fa-wrench fa-fw"></i>Video<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+
+
+
+                                    <li>
+                                        <a href="Manage_Video.aspx">manage Video</a>
+                                    </li>
+
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+
+                            <li>
+                                <a href="../games/user_home.aspx"><i class="fa fa-wrench fa-fw"></i>Go Games Admin</a>
+                      
+                            </li>
+
+                             
+                            <li>
+                                <a href="Manage_Help.aspx"><i class="fa fa-wrench fa-fw"></i>Manage  Help</a>
+                      
+                            </li>
+
+                                <li>
+                                <a href="Manage_Privacy.aspx"><i class="fa fa-wrench fa-fw"></i>Manage  Privacy</a>
+                      
+                            </li>
+                        </ul>
+                        <!-- /.nav-second-level -->
+
+
+
+
+
+
+
+
+
+                        <!-- /#side-menu -->
+                    </div>
+                    <!-- /.sidebar-collapse -->
+                </div>
+                <!-- /.navbar-static-side -->
+            </nav>
+            <div id="page-wrapper">
+                <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+            <!-- /#page-wrapper -->
+        </div>
+        <!-- /#wrapper -->
+    </form>
+</body>
+</html>
