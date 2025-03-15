@@ -1,0 +1,337 @@
+@media only screen and (max-width : 540px)
+{
+    .chat-sidebar{
+        display: none !important;
+    }
+               
+    .chat-popup{
+        display: none !important;
+    }
+}
+
+.topChatHeader{
+    width:100%;
+    height:67px;
+    background:#d0d0d0;
+    margin-bottom:5px;
+}
+
+.topChatHeaderText{
+    font-size:22px;
+    color:teal;
+    text-align:center;
+    padding-top: 9px;
+}
+
+.topChatHeaderTextLeft{
+    font-size:22px;
+    color:teal;
+    text-align:center;
+    padding-top: 9px;
+    padding-left:100px;
+}
+
+.topChatHeaderTextRight{
+    font-size:18px;
+    color:teal;
+    text-align:center;
+    padding-top: 21px;
+    padding-right:100px;
+}
+
+.chatHeaderRight, .chatHeaderMiddle, .chatHeaderLeft{
+    background:#eadfdf;
+    min-height:40px;
+}
+
+.chatHeaderRight{
+    color:teal;
+    text-align:left;
+    padding:7px 10px 10px 10px;
+}
+
+.chatIcon{
+    font-size: 16px; position: absolute; top: 4px;
+}
+
+.chatIconRequest{
+    font-size: 16px; position: absolute; top: 4px; right: -5px;
+}
+
+.chatlistdropdown {
+  border: 4px solid #cc33cc !important;
+  border-radius: 0 !important;
+  margin-top: 26px !important;
+  overflow-x: hidden !important;
+  overflow-y: scroll !important;
+  padding: 0 !important;
+  width: 304px !important;
+  z-index: 1;
+  margin-left: -101px !important;
+  height:333px;
+}
+
+.messagelistdropdown {
+  border: 4px solid #cc33cc !important;
+  border-radius: 0 !important;
+  margin-top: 26px !important;
+  overflow-x: hidden !important;
+  overflow-y: scroll !important;
+  padding: 0 !important;
+  width: 304px !important;
+  z-index: 1;
+  margin-left: -81px !important;
+  height:333px;
+}
+
+.chatimg {
+    height:40px;
+    width: 40px;
+}
+
+.chatexmargin{
+	margin-top:10px;
+}
+
+.chatexmargin2{
+	margin-top:13px;
+}
+           
+.chat-sidebar
+{
+    width: 200px;
+    position: fixed;
+    height: 100%;
+    right: 0px;
+    top: 0px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+           
+.sidebar-name
+{
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 4px;
+    font-size: 12px;
+}
+           
+.sidebar-name span
+{
+    padding-left: 5px;
+}
+           
+.sidebar-name a
+{
+    display: block;
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
+}
+           
+.sidebar-name:hover
+{
+    background-color:#e1e2e5;
+}
+           
+.sidebar-name img
+{
+    width: 32px;
+    height: 32px;
+    vertical-align:middle;
+}
+           
+.popup-box
+{
+    position: fixed;
+    bottom: 5px;
+    right: 30px;
+    height: 350px;
+    background:#fff;
+    width: 304px;
+    border: 1px solid #bbb;
+}
+           
+.popup-box .popup-head
+{
+    background-color:red !important;
+    padding: 0px 5px 0px 5px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 14px;
+    clear: both;
+}
+    
+.popup-box .popup-head a {
+    color:#ffffff!important;
+} 
+            
+.popup-box .popup-head .popup-head-left
+{
+    float: left;
+}
+           
+.popup-box .popup-head .popup-head-right
+{
+    float: right;
+    opacity: 0.5;
+}
+           
+.popup-box .popup-head .popup-head-right a
+{
+    text-decoration: none;
+    color: inherit;
+}
+           
+.popup-box .popup-messages
+{
+    height: 290px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    margin-bottom: 0px;
+    background: #fff;
+}
+
+#btEmoji{
+    position: absolute;
+    top: 0px;
+    left: 8px;
+    width: 30px;
+    height: 30px;
+    border: none;
+    background: none;
+    outline: none;
+    font-size: 25px;
+    text-decoration:none;
+}
+
+#btEmoji1{
+    position: absolute;
+    top: 0px;
+    left: 40px;
+    width: 30px;
+    height: 30px;
+    border: none;
+    background: none;
+    outline: none;
+    font-size: 25px;
+    text-decoration:none;
+}
+
+#btEmoji2{
+    position: absolute;
+    top: 0px;
+    left: 77px;
+    width: 30px;
+    height: 30px;
+    border: none;
+    background: none;
+    outline: none;
+    font-size: 25px;
+    text-decoration:none;
+}
+
+#btEmoji3{
+    position: absolute;
+    top: 0px;
+    left: 115px;
+    width: 30px;
+    height: 30px;
+    border: none;
+    background: none;
+    outline: none;
+    font-size: 25px;
+    text-decoration:none;
+}
+
+.emoji-list {
+    height: 200px !important;
+    width: 250px !important;
+    background: #fff !important;
+    border: #020202 !important;
+    position: absolute !important;
+    overflow: hidden !important;
+    top: -203px !important;
+    right: 0px !important;
+    border-radius:0px !important;
+}
+
+.emoji-list1 {
+    height: 200px !important;
+    width: 250px !important;
+    background: #fff !important;
+    border: #020202 !important;
+    position: absolute !important;
+    overflow: hidden !important;
+    top: -203px !important;
+    right: 0px !important;
+    border-radius:0px !important;
+}
+
+.emoji-list2 {
+    height: 200px !important;
+    width: 250px !important;
+    background: #fff !important;
+    border: #020202 !important;
+    position: absolute !important;
+    overflow: hidden !important;
+    top: -203px !important;
+    right: 0px !important;
+    border-radius:0px !important;
+}
+
+.emoji-list li {
+    float: left;
+    font-size: 30px;
+    margin: 0 10px 0 10px;
+    cursor: pointer;
+}
+
+.emoji-list1 li {
+    float: left;
+    font-size: 30px;
+    margin: 0 10px 0 10px;
+    cursor: pointer;
+}
+
+.emoji-list2 li {
+    float: left;
+    font-size: 30px;
+    margin: 0 10px 0 10px;
+    cursor: pointer;
+}
+
+.blink_me {
+    -webkit-animation-name: blinker;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+    
+    -moz-animation-name: blinker;
+    -moz-animation-duration: 1s;
+    -moz-animation-timing-function: linear;
+    -moz-animation-iteration-count: infinite;
+    
+    animation-name: blinker;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@-moz-keyframes blinker {  
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+}
+
+@-webkit-keyframes blinker {  
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+}
+
+@keyframes blinker {  
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+}

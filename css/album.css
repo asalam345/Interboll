@@ -1,0 +1,36 @@
+﻿body
+{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+.modal
+{
+    display: none;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+
+    z-index: 100;
+    opacity: 9;
+    filter: alpha(opacity=60);
+    -moz-opacity:9;
+    min-height: 100%;
+}
+
+#divImage
+{
+    display: none;
+    z-index: 1000;
+    position: fixed;
+    top:53px!important;
+    left: 0;
+    background-color: White;
+    height: 596px;
+    /*width: 600px;*/
+    padding: 3px;
+    border: solid 1px black;
+    z-index: 555;
+
+
+}
