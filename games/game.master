@@ -1,0 +1,512 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="game.master.cs" Inherits="games_game" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Interboll</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="description" content="interboll, chat, games" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="css_sub/normalize.css" />
+    <link rel="stylesheet" href="css_sub/bootstrap.min.css" />
+    <link rel="stylesheet" href="css_sub/font-awesome.min.css" />
+    <link rel="stylesheet" href="css_sub/animate.css" />
+    <link rel="stylesheet" href="css_sub/main.css" />
+    <link rel="stylesheet" href="css_sub/responsive.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico" />
+    <link rel="stylesheet" href="css_sub/carouseller.css" />
+    <script src="js/vendor/jquery-1.11.3.min.js"></script>
+    <script src="js/jquery.lazy.image.js"></script>
+    <script>
+        $(function () {
+            $('.lazy-image').lazy({
+                placeholder: "data:image/gif;base64,R0lGODlhEALAPQAPzl5uLr9Nrl8e7..."
+            });
+        });
+
+        $(function () {
+            $('.lazy-image-small').lazy({
+                placeholder: "data:image/gif;base64,R0lGODlhEALAPQAPzl5uLr9Nrl8e7..."
+            });
+        });
+
+        function SetTarget() {
+            document.forms[0].target = "_blank";
+        }
+	</script>
+    <style>
+         img.lazy-image {
+            width: 100% ; 
+            height: 150px;
+            display: inline-block;
+            background-image: url('../USERPANEL/img/loading/21.gif');
+            background-repeat: no-repeat;
+            background-position: 50% 50%;
+        }
+
+        img.lazy-image-small {
+            width: 24px ; 
+            height: 24px ;
+            display: inline-block;
+            background-image: url('../USERPANEL/img/loading/21.gif');
+            background-repeat: no-repeat;
+            background-position: 50% 50%;
+        }
+    </style>
+    <style>
+        .ui-widget-content {
+            background: #ffffff url("images/ui-bg_flat_75_ffffff_40x100.png") repeat-x scroll 50% 50% !important;
+            border: 1px solid #aaaaaa;
+            color: #222222;
+            font-family: serif !important;
+            font-size: 14px !important;
+            font-weight: normal !important;
+            height: 400px;
+            margin-top: -28px !important;
+            overflow-x: hidden;
+            position: absolute !important;
+            z-index: 9999 !important;
+        }
+    </style>
+    <script src="js/Carousel_slider/carouseller.min.js"></script>
+    <script src="js/Carousel_slider/jquery.easing.1.3.js"></script>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <style type="text/css">
+        .ratingStar1 {
+            font-size: 0pt;
+            width: 20px;
+            height: 20px;
+            cursor: text;
+            display: block;
+            background-repeat: no-repeat;
+        }
+
+        .filledStar1 {
+            background-image: url(../USERPANEL/img/rating/starFill.png);
+        }
+
+        .emptyStar1 {
+            background-image: url(../USERPANEL/img/rating/starEmpty.png);
+        }
+
+        .savedStar1 {
+            background-image: url(../USERPANEL/img/rating/starSave.png);
+        }
+    </style>
+</head>
+<body style="padding: 10px; background-color: #ea3328;">
+    <form id="form2" runat="server">
+        <cc1:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server"></cc1:ToolkitScriptManager>
+        <div class="bottomborderindex"></div>
+        <div class="backgroundbgcolor">
+            <div class="row gutter-10">
+                <div class="col-sm-3">
+                    <div style="height: 4px"></div>
+                    <div class="boxsocial1">
+                        <div class="scrollboxhide1"></div>
+                        <div class="scrolfirstbox">
+  
+                            <div class="boxsmall">
+                                <div class="">
+                                    <div class="row">
+                                        <div class="col-sm-12"><p class="textdecorationsta" style="margin:0px;">Best Games By Players</p></div>
+                                    </div>
+                                    <hr />
+                                </div>
+                                <div class="middlebox">
+                                    <div class="row gutter-10">
+                                        <asp:Repeater ID="rpGamesBestPlayer" runat="server">
+                                            <ItemTemplate>
+                                                <div class="col-sm-6">
+                                                    <div style="background-color: #e5e5e5; font-size: 30px; text-align: center;">
+                                                        <a href='game_details.aspx?id=<%# Eval("g_id") %>&setpid=<%: Guid.NewGuid() %>' target="_blank">
+                                                            <img data-src='<%# Eval("g_image") %>' class="lazy-image imageeventsbooks" /></a>
+                                                        <h5><a href='game_details.aspx?id=<%# Eval("g_id") %>&setpid=<%: Guid.NewGuid() %>' target="_blank"><%# Eval("g_name") %></a></h5>
+                                                        <div class="fonteventtext" style="margin: 0 auto; text-align: center; width: 103px;">
+                                                            <cc1:Rating ID="Rating1"
+                                                                runat="server"
+                                                                ReadOnly="true"
+                                                                StarCssClass="ratingStar"
+                                                                WaitingStarCssClass="savedStar"
+                                                                FilledStarCssClass="filledStar"
+                                                                EmptyStarCssClass="emptyStar"
+                                                                CurrentRating='<%# Eval("rating") %>'
+                                                                MaxRating="5">
+                                                            </cc1:Rating>
+                                                        </div>
+                                                        <div style="clear: both"></div>
+                                                        <p class="fonteventtext" style="margin-top: 8px;padding-bottom:10px;"><%# Eval("g_type") %> Games</p>
+                                                    </div>
+                                                </div>
+                                            </ItemTemplate>
+                                        </asp:Repeater>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="boxsmall">
+                                <div class="">
+                                    <div class="row">
+                                        <div class="col-sm-12"><p class="textdecorationsta" style="margin:0px;">Games Comming Soon</p></div>
+                                    </div>
+                                    <hr />
+                                </div>
+                                <div class="middlebox" style="margin-bottom:20px;">
+                                    <div class="row gutter-10">
+                                        <asp:Repeater ID="rpGamesCommingSoon" runat="server">
+                                            <ItemTemplate>
+                                                <div class="col-sm-6">
+                                                    <div style="background-color: #e5e5e5; font-size: 30px; text-align: center;">
+                                                        <img data-src='<%# Eval("g_image") %>' class="lazy-image imageeventsbooks" />
+                                                        <h5><%# Eval("g_name") %></h5>
+                                                        <div style="clear: both"></div>
+                                                        <p class="fonteventtext" style="margin-top: 8px; padding-bottom:10px;"><%# Eval("g_type") %> Games</p>
+                                                    </div>
+                                                </div>
+                                            </ItemTemplate>
+                                        </asp:Repeater>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="boxsocialwrap">
+                        <div class="scrollboxhide"></div>
+                        <div class="search">
+                            <div class="row">
+                                <div class="col-sm-1">
+                                    <a href="http://www.interboll.com/"><img border="0" class="oiiogo" src="img/interboll.png"/></a>
+                                </div>
+                                <div class="col-sm-11">
+                                    <div class="search2">
+                                        <asp:Panel ID="searchPanel" runat="server" DefaultButton="btSearchText">
+                                            <asp:TextBox ID="txSearchGame" runat="server" placeholder="Search" CssClass="input_search" autocomplete="off" aria-autocomplete="list" aria-haspopup="true"></asp:TextBox>
+                                            <div id="btnSearch" class="btn_search">
+                                                <div class="searchbtn2">
+                                                    <asp:LinkButton runat="server" ID="btSearchText" OnClick="btSearchText_Click" OnClientClick = "SetTarget();"><img border="0" class="searchimg" src="img/search_btn.png"/></asp:LinkButton>
+                                                </div>
+                                            </div>
+                                        </asp:Panel>
+                                        <div style="clear: both"></div>
+                                    </div>
+                                </div>
+                                <div style="clear: both"></div>
+                            </div>
+                        </div>
+                        <div class="boxsocial2">
+                            <asp:ContentPlaceHolder ID="body" runat="server">
+                            
+                            </asp:ContentPlaceHolder>
+                            <div style="clear: both"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-3">
+                    <div style="height: 4px"></div>
+                    <div class="profilcoverpage">
+                        <img src="img/Ac3.jpg" class="musicbanner" style="height: 138px; text-align: center; color: #ffffff; padding: 8px; background-repeat: no-repeat; background-color: rgba(14, 14, 14, 0.8)" />
+                    </div>
+                    <div class="boxsocial3">
+                        <div class="scrollboxhide3"></div>
+                        <div class="scrollboxhide3r"></div>
+                        <div class="tabcontentswrap">
+                            <div class="">
+                                <ul class="nav nav-tabs tabcss">
+                                    <li class="menumin">
+                                        <a href="Default.aspx?platform=Interboll">Interboll</a>
+                                    </li>
+
+                                    <li class="menumin ">
+                                        <a href="Default.aspx?platform=Android">Android</a>
+                                    </li>
+
+                                    <li class="menumin">
+                                        <a href="Default.aspx?platform=IOS">IOS</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content tabcontents">
+                                    <div class="tab-pane active" id="1" style="">
+                                        <div class="boxpro" id="divHot" runat="server">
+                                            <div class="gamestitleright">
+                                                Hot Games · <a href="#">See More</a>
+                                            </div>
+                                            <div class="aboutwrap2">
+                                                <div class="boxsmall2">
+                                                    <div class="middlebox">
+                                                        <div class="row">
+                                                            <asp:Repeater ID="rpGameDetailsHot" runat="server">
+                                                                <ItemTemplate>
+                                                                    <div class="gamesprof">
+                                                                        <div class="row">
+                                                                            <div class="col-sm-1">
+                                                                                <img data-src='<%# Eval("g_image") %>' class="lazy-image-small imgprofilgames">
+                                                                            </div>
+                                                                            <div class="col-sm-8">
+                                                                                <p style="margin-left: 10px; font-size: 14px"><a href='game_details.aspx?id=<%# Eval("g_id") %>&setpid=<%: Guid.NewGuid() %>'><%# Eval("g_name") %></a></p>
+                                                                            </div>
+                                                                            <div class="col-sm-1"><%# Eval("g_type") %></div>
+                                                                        </div>
+                                                                        <div style="clear: both"></div>
+                                                                    </div>
+                                                                </ItemTemplate>
+                                                            </asp:Repeater>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div style="clear: both"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="clear: both"></div>
+                </div>
+            </div>
+        </div>
+        <!--background-body-end-start-->
+        <!--model box start chat-->
+        <!-- Modal -->
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Modal Header</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Some text in the modal.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--model box end chat-->
+        <!--<script src="js/vendor/jquery-1.11.3.min.js"></script>-->
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>
+
+        <!--thumble slider start-->
+        <script type="text/javascript">
+            $(function () {
+                $('#second').carouseller({
+                    scrollSpeed: 800,
+                    /*autoScrollDelay: 1000,*/
+                    easing: 'linear'
+                });
+            });
+        </script>
+
+        <script type="text/javascript">
+            $(function () {
+                $('#second2').carouseller({
+                    scrollSpeed: 800,
+                    /*autoScrollDelay: 1000,*/
+                    easing: 'linear'
+                });
+            });
+        </script>
+        <script type="text/javascript">
+            $(function () {
+                $('#second3').carouseller({
+                    scrollSpeed: 800,
+                    /*autoScrollDelay: 1000,*/
+                    easing: 'linear'
+                });
+            });
+        </script>
+        <script type="text/javascript">
+            $(function () {
+                $('#second4').carouseller({
+                    scrollSpeed: 800,
+                    /*autoScrollDelay: 1000,*/
+                    easing: 'linear'
+                });
+            });
+        </script>
+        <script type="text/javascript">
+            $(function () {
+                $('#second5').carouseller({
+                    scrollSpeed: 800,
+                    /*autoScrollDelay: 1000,*/
+                    easing: 'linear'
+                });
+            });
+        </script>
+
+        <script type="text/javascript">
+            $(function () {
+                $('#second6').carouseller({
+                    scrollSpeed: 800,
+                    /*autoScrollDelay: 1000,*/
+                    easing: 'linear'
+                });
+            });
+        </script>
+
+        <script type="text/javascript">
+            $(function () {
+                $('#second7').carouseller({
+                    scrollSpeed: 800,
+                    /*autoScrollDelay: 1000,*/
+                    easing: 'linear'
+                });
+            });
+        </script>
+
+        <script type="text/javascript">
+            $(function () {
+                $('#second8').carouseller({
+                    scrollSpeed: 800,
+                    /*autoScrollDelay: 1000,*/
+                    easing: 'linear'
+                });
+            });
+        </script>
+
+        <script type="text/javascript">
+            $(function () {
+                $('#second9').carouseller({
+                    scrollSpeed: 800,
+                    /*autoScrollDelay: 1000,*/
+                    easing: 'linear'
+                });
+            });
+        </script>
+
+        <script type="text/javascript">
+            $(function () {
+                $('#second10').carouseller({
+                    scrollSpeed: 800,
+                    /*autoScrollDelay: 1000,*/
+                    easing: 'linear'
+                });
+            });
+        </script>
+        <script type="text/javascript">
+            $(function () {
+                $('#second11').carouseller({
+                    scrollSpeed: 800,
+                    /*autoScrollDelay: 1000,*/
+                    easing: 'linear'
+                });
+            });
+        </script>
+        <script type="text/javascript">
+            $(function () {
+                $('#second12').carouseller({
+                    scrollSpeed: 800,
+                    /*autoScrollDelay: 1000,*/
+                    easing: 'linear'
+                });
+            });
+        </script>
+        <script type="text/javascript">
+            $(function () {
+                $('#second13').carouseller({
+                    scrollSpeed: 800,
+                    /*autoScrollDelay: 1000,*/
+                    easing: 'linear'
+                });
+            });
+        </script>
+        <script type="text/javascript">
+            $(function () {
+                $('#second14').carouseller({
+                    scrollSpeed: 800,
+                    /*autoScrollDelay: 1000,*/
+                    easing: 'linear'
+                });
+            });
+        </script>
+        <script type="text/javascript">
+            $(function () {
+                $('#second15').carouseller({
+                    scrollSpeed: 800,
+                    /*autoScrollDelay: 1000,*/
+                    easing: 'linear'
+                });
+            });
+        </script>
+        <script type="text/javascript">
+            $(function () {
+                $('#second16').carouseller({
+                    scrollSpeed: 800,
+                    /*autoScrollDelay: 1000,*/
+                    easing: 'linear'
+                });
+            });
+        </script>
+
+        <script type="text/javascript">
+            $(function () {
+                $('#second17').carouseller({
+                    scrollSpeed: 800,
+                    /*autoScrollDelay: 1000,*/
+                    easing: 'linear'
+                });
+            });
+        </script>
+
+        <script type="text/javascript">
+            $(function () {
+                $('#second18').carouseller({
+                    scrollSpeed: 800,
+                    /*autoScrollDelay: 1000,*/
+                    easing: 'linear'
+                });
+            });
+        </script>
+        <script type="text/javascript">
+            $(function () {
+                $('#second19').carouseller({
+                    scrollSpeed: 800,
+                    /*autoScrollDelay: 1000,*/
+                    easing: 'linear'
+                });
+            });
+        </script>
+        <script type="text/javascript">
+            $(function () {
+                $('#second20').carouseller({
+                    scrollSpeed: 800,
+                    /*autoScrollDelay: 1000,*/
+                    easing: 'linear'
+                });
+            });
+        </script>
+
+        <script type="text/javascript">
+            $(function () {
+                $('#second21').carouseller({
+                    scrollSpeed: 800,
+                    /*autoScrollDelay: 1000,*/
+                    easing: 'linear'
+                });
+            });
+        </script>
+        <script type="text/javascript">
+            $(function () {
+                $('#second22').carouseller({
+                    scrollSpeed: 800,
+                    /*autoScrollDelay: 1000,*/
+                    easing: 'linear'
+                });
+            });
+        </script>
+        <!--thumble slider end-->
+    </form>
+</body>
+</html>

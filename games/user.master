@@ -1,0 +1,96 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="user.master.cs" Inherits="games_user" %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head runat="server">
+    <title>USERPANEL</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="description" content="interboll, games" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="../USERPANEL/img/favicon/fav.jpg" />
+    <link rel="stylesheet"  href="../USERPANEL/css/main.css"/>
+    <link rel="stylesheet" href="../USERPANEL/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../USERPANEL/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="../USERPANEL/css/adminLTE.min.css" />
+    <link rel="stylesheet" href="../USERPANEL/css/all-skins.min.css" />
+    <link rel="stylesheet" href="../USERPANEL/calendar/zebra_datepicker.css" />
+    <script type="text/javascript" src="../USERPANEL/js/jQuery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="../USERPANEL/calendar/zebra_datepicker.js"></script>
+    <script type="text/javascript" src="../USERPANEL/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../USERPANEL/js/app.min.js"></script>
+    <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('a[href="' + document.location.pathname + '"]').parents('li').addClass('active');
+        });
+    </script>
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+    <form id="form_body" runat="server">
+        <div class="wrapper">
+            <header class="main-header">
+                <a href="../Default.aspx" class="logo" onmouseover="this.style.backgroundColor='#ef4b4b'" onmouseout="this.style.backgroundColor='#ed1e24'" style="background-color: #ed1e24"><span class="logo-mini">I</span><span class="logo-lg">INTERBOLL</span></a>
+                <nav class="navbar navbar-static-top" role="navigation" style="background-color: #ed1e24;">
+                    <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button" onmouseover="this.style.backgroundColor='#ef4b4b'" onmouseout="this.style.backgroundColor='transparent'"><span class="sr-only">Toggle navigation</span></a>
+                    <div class="navbar-custom-menu">
+                        <ul class="nav navbar-nav">
+                            <li class="dropdown user user-menu">
+                                <a href="#" class="dropdown-toggle" onmouseover="this.style.backgroundColor='#ef4b4b'" onmouseout="this.style.backgroundColor='transparent'" data-toggle="dropdown">
+                                    <span>
+                                        <i class="fa fa-user"></i>
+                                        <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
+                                        <i class="fa caret"></i>
+                                    </span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="user-header" style="background-color: transparent">
+                                        <img src="../USERPANEL/img/upload/blank_male.png" class="img-circle" alt="USER" style="height: 120px; width: 120px;">
+                                        <p style="color: teal">Admin</p>
+                                    </li>
+                                    <li class="user-footer">
+                                        <div class="text-center">
+                                            <a href="~/signout.aspx" class="btn btn-default" runat="server"><i class="fa fa-sign-out fa-fw"></i>Logout</a>
+                                            <asp:Button ID="btnLogout" class="btn btn-default btn-flat" runat="server" OnClick="btnLogout_Click" Text="Logout" Visible="false"/>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </header>
+            <aside class="main-sidebar">
+                <section class="sidebar">
+                    <ul class="sidebar-menu">
+                        <li class="treeview">
+                            <a href="/games/user_home.aspx"><i class="fa fa-home"></i><span>User Home</span></a>
+                        </li>
+                        <li class="treeview">
+                            <a href="#"><i class="fa fa-book"></i><span>Manage Games</span><i class="fa fa-angle-left pull-right"></i></a>
+                            <ul class="treeview-menu">
+                                <li><a href="/games/user_view_gameinformation.aspx"><i class="fa fa-chevron-circle-right"></i>Games Information</a></li>
+                            </ul>
+                        </li>
+                        <li class="treeview">
+                            <a href="../admin/Manage_Item.aspx"><i class="fa fa-globe"></i><span>Go Interboll Admin</span></a>
+                        </li>
+                    </ul>
+                </section>
+            </aside>
+            <div class="content-wrapper">
+                <section class="content-header" style="text-align: center; text-transform: capitalize; font-size: 18px; font-family: serif; font-weight: bold; color: rgb(237, 30, 36);">
+                    <div>
+                        <asp:ContentPlaceHolder ID="body_header" runat="server"></asp:ContentPlaceHolder>
+                    </div>
+                </section>
+                <section class="content">
+                    <div>
+                        <asp:ContentPlaceHolder ID="main_body" runat="server"></asp:ContentPlaceHolder>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </form>
+</body>
+</html>
